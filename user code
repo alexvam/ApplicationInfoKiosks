@@ -1,0 +1,150 @@
+package user;
+
+import java.awt.Container;
+
+public class GuiUser extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiUser frame = new GuiUser();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiUser() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JButton btnNewButton = new JButton(
+				"InformationPoi");/*
+									 * Gets Information about a Point of Interest
+									 */
+
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFrame F = new JFrame("POIList");
+				F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				F.setSize(250, 154);
+				Container C = F.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio", "Kerameikos" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane SP = new JScrollPane(list);
+				SP.setPreferredSize(new Dimension(100, 80));
+				C.add(SP);
+				F.show();
+
+			};
+
+		});
+		btnNewButton.setBounds(79, 70, 124, 56);
+		contentPane.add(btnNewButton);
+
+		JButton btnQrcode = new JButton("QrCode");
+		btnQrcode.setBounds(236, 137, 124, 56);
+		contentPane.add(btnQrcode);
+
+		JButton btnSele = new JButton(
+				"SelectPoi"); /* Select a Point of Interest */
+
+		btnSele.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFrame F = new JFrame("POIList");
+				F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				F.setSize(250, 154);
+				Container C = F.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio", "Kerameikos" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane SP = new JScrollPane(list);
+				SP.setPreferredSize(new Dimension(100, 80));
+				C.add(SP);
+				F.show();
+
+			};
+
+		});
+
+		btnSele.setBounds(236, 70, 124, 56);
+		contentPane.add(btnSele);
+
+		JButton btnGradepoi = new JButton(
+				"GradePoi"); /* The user Grades a point of interest */
+
+		btnGradepoi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFrame F = new JFrame("POIList");
+				F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				F.setSize(250, 154);
+				Container C = F.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio", "Kerameikos" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane SP = new JScrollPane(list);
+				SP.setPreferredSize(new Dimension(100, 80));
+				C.add(SP);
+				F.show();
+
+			};
+
+		});
+
+		btnGradepoi.setBounds(79, 137, 124, 56);
+		contentPane.add(btnGradepoi);
+
+		JButton btnNewButton_1 = new JButton(
+				"Enter As an Administrator");/*
+												 * It shows The Gui of the Manager
+												 */
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ManagerGui Gui = new ManagerGui();
+				Gui.show();
+
+			}
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerGui Gui = new ManagerGui();
+
+				Gui.setVisible(true);
+
+			}
+		});
+		btnNewButton_1.setBounds(129, 203, 175, 34);
+		contentPane.add(btnNewButton_1);
+
+		JLabel lblNewLabel = new JLabel("Welcome ");
+		lblNewLabel.setBounds(208, 11, 71, 37);
+		contentPane.add(lblNewLabel);
+	}
+}
