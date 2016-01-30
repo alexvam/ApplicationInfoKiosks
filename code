@@ -1,1 +1,205 @@
 
+package manager;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+
+public class ManagerGui extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	JPanel contentPane = new JPanel();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManagerGui frame = new ManagerGui();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ManagerGui() {
+
+		getContentPane().add(BorderLayout.CENTER, contentPane);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JButton btnNewButton = new JButton(
+				"Add New Manager"); /* Adds a new Manager to the base */
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Connection conn = null;
+				Statement stmt = null;
+				ResultSet rs = null;
+				try {
+
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					String connectionUrl = "jdbc:mysql://127.0.0.1:3306/managerbase";
+					String connectionUser = "root";
+					String connectionPassword = "root";
+					conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
+					stmt = conn.createStatement();
+					stmt = conn.createStatement();
+					stmt.executeUpdate("insert into managers values (4,'Penny','Bakolouka')");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				} finally {
+					try {
+						if (rs != null)
+							rs.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+					try {
+						if (stmt != null)
+							stmt.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+					try {
+						if (conn != null)
+							conn.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+
+			}
+		});
+		btnNewButton.setBounds(67, 54, 127, 51);
+		contentPane.add(btnNewButton);
+
+		final JButton btnAddNewPoi = new JButton(
+				"Add New POI");/*
+								 * Adds new Point of interest Kifisia train
+								 * station to the list
+								 */
+
+		btnAddNewPoi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFrame f = new JFrame("POIList");
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(250, 154);
+				Container c = f.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio", "Kerameikos", "Kifisia train Station" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane sP = new JScrollPane(list);
+				sP.setPreferredSize(new Dimension(100, 80));
+				c.add(sP);
+				f.show();
+
+			};
+
+		});
+		btnAddNewPoi.setBounds(232, 54, 127, 51);
+		contentPane.add(btnAddNewPoi);
+
+		JButton btnChangePoi = new JButton(
+				"Change POI");/*
+								 * Changes point of interest Kerameikos to
+								 * Likavitos from Poilist
+								 */
+
+		btnChangePoi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				final JFrame f = new JFrame("POIList");
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(250, 154);
+				Container c = f.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio", "Likavitos" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane sP = new JScrollPane(list);
+				sP.setPreferredSize(new Dimension(100, 80));
+				c.add(sP);
+				f.show();
+
+			};
+
+		});
+
+		btnChangePoi.setBounds(67, 143, 127, 51);
+		contentPane.add(btnChangePoi);
+
+		JButton btnDeletePoi = new JButton(
+				"Delete POI"); /*
+								 * Deletes the Point of interest Kerameikos from
+								 * the list
+								 */
+
+		btnDeletePoi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFrame f = new JFrame("POIList");
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setSize(250, 154);
+				Container c = f.getContentPane();
+
+				String s[] = new String[] { "Acropolis", "Sounio" };
+
+				final JList<?> list = new JList<Object>(s);
+				JScrollPane sP = new JScrollPane(list);
+				sP.setPreferredSize(new Dimension(100, 80));
+				c.add(sP);
+				f.show();
+
+			};
+
+		});
+
+		btnDeletePoi.setBounds(232, 143, 127, 51);
+		contentPane.add(btnDeletePoi);
+	}
+
+}
